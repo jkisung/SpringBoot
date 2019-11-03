@@ -1,0 +1,15 @@
+package com.sba.blog.vo;
+
+public class Result {
+	int resultCode;
+	String message;
+	
+	public Result() {
+		
+	}
+	
+	public Result(int result, String message) {
+		this.resultCode= result;
+		this.message= message;
+	}
+}

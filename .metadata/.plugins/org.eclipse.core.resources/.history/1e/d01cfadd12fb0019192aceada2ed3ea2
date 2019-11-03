@@ -1,0 +1,28 @@
+package com.sba.blog.PostRepository;
+
+import java.sql.RowIdLifetime;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.integration.IntegrationProperties.Jdbc;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import com.sba.blog.mapper.PostMapper;
+import com.sba.blog.vo.Post;
+
+@Repository
+public class PostRepository {
+
+		@Autowired
+		private JdbcTemplate jdbcTemplate;
+		
+		public Post findOne(Long id) {
+			String sql = "SELECT * FROM post WHERE id = ?";
+			RowMapper<Post> rowMapper = new PostMapper();
+			
+			return this.jdbcTemplate.queryForObject(sql, rowMapper, id);
+		}
+	
+	
+}

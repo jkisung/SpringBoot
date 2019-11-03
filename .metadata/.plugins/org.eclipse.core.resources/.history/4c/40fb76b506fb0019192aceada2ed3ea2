@@ -1,0 +1,5 @@
+package com.sba.blog.controller;
+
+public class ModelTestController {
+
+}

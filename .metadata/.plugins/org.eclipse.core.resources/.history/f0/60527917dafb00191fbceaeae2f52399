@@ -1,0 +1,87 @@
+package com.sba.blog.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.sba.blog.PostRepository.PostRepository;
+import com.sba.blog.repository.PostJpaRepository;
+import com.sba.blog.vo.Post;
+
+@Service
+public class PostService {
+	
+	@Autowired
+	PostRepository postRepository;
+	
+	@Autowired
+	PostJpaRepository postJpaRepository;
+	
+	private static List<Post> posts;
+	
+		public Post getPost() {
+			Post post= new Post(1L,"HHJ","HHJ's Post","welcome to my blog");
+			return post;
+		}
+//		public List<Post> getPosts() {
+//			posts= new ArrayList<>();
+//			posts.add(new Post(1L, "HHJ","HHJ' Post", "Welcome to my blog"));
+//			posts.add(new Post(2L, "jin", "jin's post", "jin Contents"));
+//			return posts;
+//		}
+		public Post getPost(int id) {
+			Post post = posts.get(id-1);
+			return post;
+		}
+		public Post getPost(Long id) {
+//			Post post = postRepository.findOne(id);
+			
+			Post post = postJpaRepository.findOneById(id);
+			return post;
+		}
+		public List<Post> getPosts() { 
+			List<Post> postList= postJpaRepository.findAllByOrderByUpdtDateDesc();
+			return postList;
+		}
+		
+		public boolean deletePost(Long id) {
+			Post result= postJpaRepository.findOneById(id);
+			
+			if(result == null)
+				return false;
+			
+			postJpaRepository.deleteById(id);
+			return true;	
+		}
+		
+		public boolean savePost(Post post) {
+			Post result = postJpaRepository.save(post);
+			boolean isSuccess =  true;
+			
+			if (result == null) {
+				isSuccess = false;
+			}
+			return isSuccess;
+		}
+		
+		public boolean updatePost(Post newPost) {
+			Post oldPost= postJpaRepository.findOneById(newPost.getId());
+			
+			if(oldPost == null)
+				return false;
+			
+			if(!StringUtils.isEmpty(newPost.getTitle())) {
+				oldPost.setTitle(newPost.getTitle());
+			}
+			if(!StringUtils.isEmpty(newPost.getContent())) {
+				oldPost.setContent(newPost.getContent());
+			}
+			postJpaRepository.save(oldPost);
+			
+			return true;	
+		}
+}

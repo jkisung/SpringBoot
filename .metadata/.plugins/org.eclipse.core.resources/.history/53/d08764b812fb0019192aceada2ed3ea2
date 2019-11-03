@@ -1,0 +1,5 @@
+package com.sba.blog.PostRepository;
+
+public class PostRepository {
+
+}

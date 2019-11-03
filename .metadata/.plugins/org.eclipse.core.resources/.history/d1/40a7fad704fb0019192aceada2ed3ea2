@@ -1,0 +1,37 @@
+package com.sba.blog.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sba.blog.service.PostService;
+import com.sba.blog.vo.Post;
+
+@RestController
+public class PostController {
+	
+	@Autowired
+	PostService postService;
+	
+//	@GetMapping("/post")
+//	public Post getPost() {
+//		Post post= postService.getPost();
+//		return post;
+//	}
+	
+	@GetMapping("/post")
+	public Post getPost(@RequestParam("id") int id) {
+		Post post= postService.getPost(id);
+		return post;
+	}
+		
+	@GetMapping("/posts")
+	public List<Post> getPosts() {
+		List<Post> post = postService.getPosts();
+		return post;
+	}
+}

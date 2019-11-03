@@ -1,0 +1,27 @@
+package com.sba.blog.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sba.blog.vo.Post;
+
+@RestController
+public class PostController {
+	private static List<Post> posts;
+	
+	@GetMapping("/post")
+	public Post getPost() {
+		Post post= new Post(1L,"HHJ","HHJ's Post","welcome to my blog");
+		return post;
+	}
+	
+	@GetMapping("/posts")
+	public List<Post> getPosts() {
+		posts= new ArrayList<>();
+		posts.add(new Post(1l,"HHJ","HHJ' Post", "Welcome to my blog"));
+		posts.add(new Post(2L, "jin", "jin's post", "jin Contents"));
+		return posts;
+	}
+
+
+}

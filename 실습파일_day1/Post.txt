@@ -1,0 +1,45 @@
+package com.sba.blog.vo;
+
+import java.util.Date;
+
+public class Post {
+	private Long id;
+	private String user;
+	private String title;
+	private String content;
+	private Date regDate;
+	private Date updtDate;
+	
+	public Post() {
+		
+	}
+	
+	public Post(Long id, String user, String title, String content) {
+		this.id = id;
+		this.user = user;
+		this.title = title;
+		this.content = content;
+		this.regDate = new Date();
+		this.updtDate = new Date();
+	}
+
+	public Post(Long id, String user, String title, String content, Date regDate, Date updtDate) {
+		this.id = id;
+		this.user = user;
+		this.title = title;
+		this.content = content;
+		this.regDate = regDate;
+		this.updtDate = updtDate;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("id : ").append(id).append("\n");
+		sb.append("user : ").append(user).append("\n");
+		sb.append("title : ").append(title).append("\n");
+		sb.append("content : ").append(content).append("\n");
+		
+		return sb.toString();
+	}
+}

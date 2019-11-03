@@ -1,0 +1,15 @@
+package com.sba.blog.repository;
+
+import java.io.Serializable;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.sba.blog.vo.Post;
+
+@Repository
+public interface PostJpaRepository extends JpaRepository<Post, Serializable> {
+	Post findOneById(Long id);
+	List<Post> findAllByOrderByUpdtDateDesc();
+}
+// fidnOneById = find: SELECT, One:  ById: where is
